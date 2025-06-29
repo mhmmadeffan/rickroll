@@ -9,19 +9,51 @@
             margin: 0;
             overflow: hidden;
             display: flex;
+            flex-direction: column; /* To stack elements vertically */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #000; /* Optional: black background */
+            background-color: #000;
+            color: white; /* For text */
+            font-family: sans-serif;
         }
         #rickroll-video {
-            width: 100vw; /* Full viewport width */
-            height: 100vh; /* Full viewport height */
-            object-fit: cover; /* Cover the entire screen */
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            display: none; /* Hidden by default */
+        }
+        #play-button-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent overlay */
+            z-index: 10;
+        }
+        #play-button {
+            padding: 15px 30px;
+            font-size: 24px;
+            background-color: #f00; /* Red button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #play-button:hover {
+            background-color: #c00;
         }
     </style>
 </head>
 <body>
+    <div id="play-button-container">
+        <button id="play-button">Click to View CV Effan</button>
+    </div>
     <iframe
         id="rickroll-video"
         src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=0&loop=1&playlist=dQw4w9WgXcQ"
@@ -29,5 +61,24 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
     </iframe>
+
+    <script>
+        document.getElementById('play-button').addEventListener('click', function() {
+            var video = document.getElementById('rickroll-video');
+            var buttonContainer = document.getElementById('play-button-container');
+
+            // Hide the button and show the video
+            buttonContainer.style.display = 'none';
+            video.style.display = 'block';
+
+            // Start playing the video
+            // Note: .play() method works for HTML <video> elements.
+            // For iframe, the autoplay in src URL should handle it after user interaction.
+            // However, adding it here can sometimes help
+            if (typeof video.play === 'function') {
+                video.play().catch(e => console.log("Video play failed:", e));
+            }
+        });
+    </script>
 </body>
 </html>
