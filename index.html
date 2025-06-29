@@ -1,9 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Youtube Player</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Got Rickrolled!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center;   /* Center vertically */
+            min-height: 100vh;
+            background-color: #000;
+        }
+        #rickroll-video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            /* Pastikan iframe terlihat langsung, tidak perlu display: none; */
+        }
+        /* Hilangkan gaya untuk play-button-container dan play-button karena kita tidak menggunakannya lagi untuk autoplay paksa */
+    </style>
 </head>
 <body>
-<iframe style="width: 560px;height: 315px;"type="text/html" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&origin=wibloog.com" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+    <iframe
+        id="rickroll-video"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=0&loop=1&playlist=dQw4w9WgXcQ"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        muted> </iframe>
+
+    <script>
+        // Pastikan dokumen sudah sepenuhnya dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            var video = document.getElementById('rickroll-video');
+
+            // Fungsi untuk mencoba memutar video
+            function tryAutoplay() {
+                // Coba memutar video. Catch untuk menangani error jika browser memblokir autoplay.
+                // Karena ini iframe YouTube, video akan diputar jika browser mengizinkan autoplay (biasanya jika dibisukan).
+                // YouTube API tidak diekspos langsung ke sini, jadi kita mengandalkan parameter URL.
+                // Atribut 'muted' di iframe dan '&mute=1' di URL adalah kuncinya.
+
+                // Jika kita ingin mencoba meng-unmute setelah autoplay (sering gagal)
+                // video.muted = false; // Ini jarang berhasil tanpa interaksi
+            }
+
+            // Coba putar segera
+            tryAutoplay();
+        });
+    </script>
 </body>
 </html>
